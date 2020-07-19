@@ -1,0 +1,25 @@
+{%  extends "index.html" %}
+
+{% block title %}
+Logg in her
+{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/css/registerOgLogin.css">{% endblock %}
+{% load crispy_forms_tags %}
+
+
+
+
+{% block content%}
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+        <form method="post" class="form-group">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-dark">Logg inn</button>
+            <p>Har du ikke en konto? Lag en <a href="/signup">her!</a></p>
+        </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+{% endblock %}

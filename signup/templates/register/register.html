@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block title %}Create an Account{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/css/registerOgLogin.css">{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            <!-- Har ikke fått crispy til å fungere enda, men fokuserer ikke på det i denne sprinten. Crispy gjør det bare finere estetisk. -->
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-dark">Register</button>
+        </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+{% endblock %}
