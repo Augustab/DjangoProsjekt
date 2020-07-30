@@ -1,10 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Regnskap{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/css/regnskap.css">{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row" >
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" id="regnskapet">
+            <h3 id="overskrift">Regnskap for {{ month }}</h3>
+            <form method="POST" name="sumForm" action="{% url 'regnskap' %}" >
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-3"><input type="date" class="form-control" placeholder="Gjeldende dato" name="date"></div>
+                    <div class="col-sm-2">
+                        <select name="kategori" id="kategori" class="form-control" data-style="btn-dark">
+                            <option value="0" selected>Generelt</option>
+                            <option value="1">Mat</option>
+                            <option value="2">Trening</option>
+                            <option value="3">Reise</option>
+                            <option value="4">Drip</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" placeholder="Sum +/-" name="sum">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="Beskrivelse" name="beskrivelse">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" name="send" class="btn btn-dark" >Registrer sum</button>
+                    </div>
+                </div>
+            </form>
+            <div class="row" id="selveUtleggene">
+                <div class="col-sm-6" id="positivt">
+                    {% for sum in pos_sums %}
+                        <div class="row" >
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.kategori }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6" id="negativt">
+                    {% for sum in neg_sums %}
+                        <div class="row" >
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.kategori }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
+                            <div class="col-sm-3">
+                                <form method="POST" name="slettForm" action="{% url 'slett_sum' %}" >
+                                    {% csrf_token %}
+                                    <input type="number" value="{{ sum.id }}" style="display: none" name="bookingid">
+                                    <button type="submit" name="Slett_sum" class="btn btn-light text-center" >Slett sum</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if total < 0 %}
+                <h4 id="selveUtleggene" >Resultat hittil i {{ month }}: <span id="negativt">{{ total }}</span></h4>
+            {% else %}
+                <h4 id="selveUtleggene" >Resultat hittil i {{ month }}: <span id="positivt">{{ total }}</span></h4>
+            {% endif %}
+        </div>
+        <div class="col-sm-2"></div>
+
+</div>
+
+
+
+{% endblock %}
