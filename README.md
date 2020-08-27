@@ -6,3 +6,8 @@ Målet er at programmet automatisk skal lage sammendrag over månedene som har v
 og se, i tillegg til å hele tiden ha oversikt over beløpet i banken. 
 
 ![bilde](https://github.com/Augustab/DjangoProsjekt/blob/dev/static/images/rdme.PNG?raw=true)
+
+# Built with
+
+- [Django](https://www.djangoproject.com/)
+- [Bootstrap](https://getbootstrap.com/)
