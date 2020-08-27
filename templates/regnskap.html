@@ -17,7 +17,7 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8" id="regnskapet">
             <h3 id="overskrift">Regnskap for {{ month }}</h3>
-            <form method="POST" name="sumForm" action="{% url 'regnskap' %}" >
+            <form method="POST" name="sumForm" action="{% url 'legg_til_sum' %}" >
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-sm-3"><input type="date" class="form-control" placeholder="Gjeldende dato" name="date"></div>
@@ -48,7 +48,13 @@
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.kategori }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
-                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
+                            <div class="col-sm-3">
+                                <form method="POST" name="slettForm" action="{% url 'slett_sum' %}" >
+                                    {% csrf_token %}
+                                    <input type="number" value="{{ sum.sumid }}" style="display: none" name="sumid">
+                                    <button type="submit" name="Slett_sum" class="btn btn-dark text-center" >Slett sum</button>
+                                </form>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -61,8 +67,8 @@
                             <div class="col-sm-3">
                                 <form method="POST" name="slettForm" action="{% url 'slett_sum' %}" >
                                     {% csrf_token %}
-                                    <input type="number" value="{{ sum.id }}" style="display: none" name="bookingid">
-                                    <button type="submit" name="Slett_sum" class="btn btn-light text-center" >Slett sum</button>
+                                    <input type="number" value="{{ sum.sumid }}" style="display: none" name="sumid">
+                                    <button type="submit" name="Slett_sum" class="btn btn-dark text-center" >Slett sum</button>
                                 </form>
                             </div>
                         </div>

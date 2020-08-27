@@ -11,6 +11,9 @@ class Sum(models.Model):
                                 verbose_name='Sum_date')
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     month = models.IntegerField(default=None)
+    sumid = models.AutoField(db_column='sumid', primary_key=True)
 
 class Month(models.Model):
+    ##sums = models.QuerySet
+    ##monthid = models.IntegerField
     '''modellen for måneder bygd opp av summer.'''
