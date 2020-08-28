@@ -14,35 +14,33 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
     $(document).ready(function(){
-    var header = $('body');
+        var header = $('body');
 
-    var backgrounds = ["url('/static/images/bilde3.jpg')"
-      , "url('/static/images/bilde2.jpg')"
-      , "url('/static/images/bilde1.jpg')"];
+        var backgrounds = ["url('/static/images/bilde3.jpg')"
+          , "url('/static/images/bilde2.jpg')"
+          , "url('/static/images/bilde1.jpg')"];
 
-    var current = 0;
-    function nextBackground() {
-        current++;
-        current = current % backgrounds.length;
-        header.css('background-image', backgrounds[current]);
-    }
+        var current = 0;
+        function nextBackground() {
+            current++;
+            current = current % backgrounds.length;
+            header.css('background-image', backgrounds[current]);
+        }
     <!-- setInterval(nextBackground, 7000);-->
 
-    header.css('background-image', backgrounds[1]);});
+    header.css('background-image', backgrounds[1]);
+    });
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "230px";
-        document.getElementById("main").style.marginLeft = "230px";
-
-    }
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "230px";
+            document.getElementById("main").style.marginLeft = "230px";
+        }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-
-
-    }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
     </script>
     {% block script %}{% endblock %}
 </head>
@@ -58,6 +56,7 @@
         <a href="/logout" class="menytext">Logg ut</a>
     {% endif %}
     <a href="/regnskap" class="menytext">Regnskap</a>
+    <a href="/kontoer" class="menytext">Kontoer</a>
     <a href="/home" class="menytext">Oversikt</a>
     {% if user.is_superuser %}
         <a href="/admin" class="menytext">Min bruker</a>

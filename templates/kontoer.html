@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kontoer{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/css/regnskap.css">{% endblock %}
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row" >
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" id="regnskapet">
+            <h3 id="overskrift">Dine kontoer</h3>
+            {% for konto in kontoer %}
+                <div class="row" >
+                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.name }}</h4></div>
+                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.belop }}</h4></div>
+                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.interest}}</h4></div>
+                    <div class="col-sm-3">
+                        <form method="POST" name="slettForm" action="{% url 'slett_account' %}" >
+                            {% csrf_token %}
+                            <input type="number" value="{{ konto.accountid }}" style="display: none" name="sumid">
+                            <button type="submit" name="Slett_konto" class="btn btn-dark text-center" >Slett konto</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+            <form method="POST" name="addAccount" action="{% url 'add_account' %}" >
+                {% csrf_token %}
+                <div><h4 style="text-align: left">Legg til en konto:</h4></div>
+                <div class="row">
+                    <div class="col-sm-3"><input type="text" class="form-control" placeholder="Kontonavn" name="name"></div>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" placeholder="Beløp,-" name="belop">
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="Rente" name="interest">
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" name="send" class="btn btn-dark" >Registrer konto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-2"></div>
+</div>
+
+{% endblock %}
