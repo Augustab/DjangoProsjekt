@@ -10,3 +10,9 @@ class sumForm(forms.Form):
 class slettForm(forms.Form):
     '''Formen for å slette en booking'''
     sumid = forms.IntegerField
+
+
+class AccountForm(forms.Form):
+    name = forms.CharField
+    belop = forms.IntegerField
+    interest = forms.CharField

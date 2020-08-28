@@ -20,14 +20,13 @@
             <form method="POST" name="sumForm" action="{% url 'legg_til_sum' %}" >
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-sm-3"><input type="date" class="form-control" placeholder="Gjeldende dato" name="date"></div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2"><input type="date" class="form-control" placeholder="Gjeldende dato" name="date"></div>
+                    <div class="col-sm-3">
                         <select name="kategori" id="kategori" class="form-control" data-style="btn-dark">
-                            <option value="0" selected>Generelt</option>
-                            <option value="1">Mat</option>
-                            <option value="2">Trening</option>
-                            <option value="3">Reise</option>
-                            <option value="4">Drip</option>
+                            <option value="0" selected>Ingen konto</option>
+                            {% for account in accounts %}
+                                <option value=" {{ forloop.counter }} ">{{account.name}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="col-sm-2">

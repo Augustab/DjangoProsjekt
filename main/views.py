@@ -1,13 +1,13 @@
-from .forms import sumForm, slettForm
-from .models import Sum
+from .forms import sumForm, slettForm, AccountForm
+from .models import Sum, Account
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime
 
 months = ["Januar", "Februar", "Mars",
-                "April", "Mai", "Juni", "Juli",
-                "August", "September", "Oktober",
-                "November", "Desember"
+          "April", "Mai", "Juni", "Juli",
+          "August", "September", "Oktober",
+          "November", "Desember"
           ]
 thisMonth = int(datetime.today().strftime("%Y%m"))
 stringMonth = months[datetime.now().month - 1]
@@ -25,6 +25,11 @@ def home(response):
     return render(response, "../templates/base.html", context)
 
 
+def kontoer(response):
+    context = {"useren": response.user.username, "kontoer": Account.objects.filter(user=response.user)}
+    return render(response, "../templates/kontoer.html", context)
+
+
 def redirect(response):
     return HttpResponsePermanentRedirect(reverse('home'))
 
@@ -34,6 +39,7 @@ def regnskap(response):
     pos_sums = None
     neg_sums = None
     total = 0
+    accounts = 0
     currentmonth = int(datetime.today().strftime("%Y%m"))
     if not user.is_anonymous:
         user_sums = Sum.objects.filter(user=user)
@@ -46,11 +52,14 @@ def regnskap(response):
         for value in pos_sums:
             total += int(value.sum)
         print(total)
-    context = {"pos_sums": pos_sums, "neg_sums": neg_sums, "month": stringMonth, "total": total}
+        accounts = Account.objects.filter(user=user)
+        print(accounts)
+    context = {"pos_sums": pos_sums, "neg_sums": neg_sums, "month": stringMonth, "total": total, "accounts": accounts}
     return render(response, "../templates/regnskap.html", context)
 
+
 def legg_til_sum(response):
-    if response.method=="POST":
+    if response.method == "POST":
         form = sumForm(response.POST)
         if form.is_valid():
             date = form.data.get('date')
@@ -58,13 +67,14 @@ def legg_til_sum(response):
             sum = int(form.data.get('sum'))
             beskrivelse = form.data.get('beskrivelse')
             kategori = KATEGORIER[int(form.data.get('kategori'))]
-            new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, kategori=kategori, user=response.user, month=month)
+            new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, kategori=kategori, user=response.user,
+                          month=month)
             new_sum.save()
         return HttpResponseRedirect(reverse('regnskap'))
 
 
 def slett_sum(request):
-    if request.method=="POST":
+    if request.method == "POST":
         form = slettForm(request.POST)
         if form.is_valid():
             # bookingid henter jeg fra det SKJULTE INPUTFELTET I FORM'en.
@@ -73,3 +83,25 @@ def slett_sum(request):
                 # sletter den valgte bookingen
                 Sum.objects.get(sumid=sumid).delete()
             return HttpResponseRedirect(reverse('regnskap'))
+
+
+def add_account(request):
+    if request.method == "POST":
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            new_account = Account(name=form.data.get('name'), belop=form.data.get('belop'),
+                                  interest=form.data.get('interest'), user=request.user)
+            new_account.save()
+        return HttpResponseRedirect(reverse('kontoer'))
+
+
+def slett_account(request):
+    if request.method == "POST":
+        form = slettForm(request.POST)
+        if form.is_valid():
+            # bookingid henter jeg fra det SKJULTE INPUTFELTET I FORM'en.
+            kontoid = form.data.get('sumid')
+            if kontoid is not None:
+                # sletter den valgte bookingen
+                Account.objects.get(accountid=kontoid).delete()
+            return HttpResponseRedirect(reverse('kontoer'))

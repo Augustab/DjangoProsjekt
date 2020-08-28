@@ -17,3 +17,12 @@ class Month(models.Model):
     ##sums = models.QuerySet
     ##monthid = models.IntegerField
     '''modellen for måneder bygd opp av summer.'''
+
+
+class Account(models.Model):
+    '''Modellen for kontoer'''
+    name = models.CharField(default=None, max_length=50)
+    belop = models.IntegerField(default=0)
+    interest = models.CharField(default=None, max_length=50)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    accountid = models.AutoField(db_column='accountid', primary_key=True)

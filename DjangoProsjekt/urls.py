@@ -24,8 +24,11 @@ urlpatterns = [
     path('home/', v.home, name="home"),
     path('signup/', v2.signup, name="signup"),
     path('regnskap/', v.regnskap, name="regnskap"),
+    path('kontoer/', v.kontoer, name="kontoer"),
     path('slett_sum/', v.slett_sum, name="slett_sum"),
     path('legg_til_sum/', v.legg_til_sum, name="legg_til_sum"),
+    path('slett_account/', v.slett_account, name="slett_account"),
+    path('add_account/', v.add_account, name="add_account"),
     path('', v.redirect, name="redirect"),
     path('', include("django.contrib.auth.urls")),
 ]
