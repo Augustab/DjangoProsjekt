@@ -22,10 +22,10 @@
                 <div class="row">
                     <div class="col-sm-2"><input type="date" class="form-control" placeholder="Gjeldende dato" name="date"></div>
                     <div class="col-sm-3">
-                        <select name="kategori" id="kategori" class="form-control" data-style="btn-dark">
+                        <select name="account" id="kategori" class="form-control" data-style="btn-dark">
                             <option value="0" selected>Ingen konto</option>
                             {% for account in accounts %}
-                                <option value=" {{ forloop.counter }} ">{{account.name}}</option>
+                                <option value="{{ forloop.counter }}">{{account.name}}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -44,7 +44,7 @@
                 <div class="col-sm-6" id="positivt">
                     {% for sum in pos_sums %}
                         <div class="row" >
-                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.kategori }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.account.name }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
                             <div class="col-sm-3">
@@ -60,7 +60,7 @@
                 <div class="col-sm-6" id="negativt">
                     {% for sum in neg_sums %}
                         <div class="row" >
-                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.kategori }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.account.name }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
                             <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum }}</h4></div>
                             <div class="col-sm-3">

@@ -2,7 +2,7 @@ from django import forms
 
 class sumForm(forms.Form):
     '''Formen til der man legger inn et utlegg/inntekt'''
-    kategori = forms.IntegerField
+    account = forms.IntegerField
     sum = forms.IntegerField
     beskrivelse = forms.CharField
     date = forms.DateField
