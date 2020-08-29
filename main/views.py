@@ -66,10 +66,17 @@ def legg_til_sum(response):
             month = int(date[:4] + date[5:7])
             sum = int(form.data.get('sum'))
             beskrivelse = form.data.get('beskrivelse')
-            kategori = KATEGORIER[int(form.data.get('kategori'))]
-            new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, kategori=kategori, user=response.user,
-                          month=month)
-            new_sum.save()
+            account = Account.objects.filter(user=response.user)
+            if not account:
+                new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, user=response.user,
+                              month=month)
+                new_sum.save()
+            else:
+                account = account[int(form.data.get('account')) - 1]
+                new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, account=account.accountid, user=response.user,
+                              month=month)
+                account.update(belop=account.belop+sum)
+                new_sum.save()
         return HttpResponseRedirect(reverse('regnskap'))
 
 

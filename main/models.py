@@ -2,16 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-class Sum(models.Model):
-    '''Modellen for utlegg/inntekter'''
-    kategori = models.CharField(default=None, max_length=50)
-    sum = models.IntegerField(default=None)
-    beskrivelse = models.CharField(default=None, max_length=50)
-    date = models.DateField(db_column='Sum_date', blank=True, null=True,
-                                verbose_name='Sum_date')
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    month = models.IntegerField(default=None)
-    sumid = models.AutoField(db_column='sumid', primary_key=True)
+
+   # def __str__(self):
+   #     return "Bruker: " + str(self.user.username) + \
+   #         " -- verdi: " + str(self.sum) + " -- måned: "
+
 
 class Month(models.Model):
     ##sums = models.QuerySet
@@ -26,3 +21,19 @@ class Account(models.Model):
     interest = models.CharField(default=None, max_length=50)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     accountid = models.AutoField(db_column='accountid', primary_key=True)
+
+   # def __str__(self):
+    #    return "Name: " + str(self.name) + \
+    #        " -- user:" + str(self.user.username)
+
+
+class Sum(models.Model):
+    '''Modellen for utlegg/inntekter'''
+    account = models.ForeignKey('Account', on_delete=models.CASCADE, default=Account.objects.get(name="Default").accountid)
+    sum = models.IntegerField(default=None)
+    beskrivelse = models.CharField(default=None, max_length=50)
+    date = models.DateField(db_column='Sum_date', blank=True, null=True,
+                                verbose_name='Sum_date')
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    month = models.IntegerField(default=None)
+    sumid = models.AutoField(db_column='sumid', primary_key=True)
