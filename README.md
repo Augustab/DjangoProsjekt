@@ -9,10 +9,10 @@ og se, i tillegg til å hele tiden ha oversikt over beløpet i banken.
 
 # Sentrale filer
 
--main/views.py
--main/models.py
--templates/base.html
--templates/regnskap.html 
+- main/views.py
+- main/models.py
+- templates/base.html
+- templates/regnskap.html 
 
 # Built with
 
