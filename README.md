@@ -7,7 +7,15 @@ og se, i tillegg til å hele tiden ha oversikt over beløpet i banken.
 
 ![bilde](https://github.com/Augustab/DjangoProsjekt/blob/dev/static/images/rdme.PNG?raw=true)
 
+# Sentrale filer
+
+-main/views.py
+-main/models.py
+-templates/base.html
+-templates/regnskap.html 
+
 # Built with
 
 - [Django](https://www.djangoproject.com/)
 - [Bootstrap](https://getbootstrap.com/)
+
