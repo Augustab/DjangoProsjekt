@@ -120,3 +120,13 @@ def slett_account(request):
                 # sletter den valgte bookingen
                 Account.objects.get(accountid=kontoid).delete()
             return HttpResponseRedirect(reverse('kontoer'))
+
+def oversikt(response):
+    used_months = Sum.objects.values_list('month', flat=True)
+    month_dict = {}
+    for month in used_months:
+        key = month-202001
+        month_dict[months[key]] = Sum.objects.filter(month = month)
+    context = {"month_dict": month_dict}
+    return render(response, "../templates/oversikt.html", context)
+
