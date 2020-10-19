@@ -26,9 +26,16 @@ def home(response):
 
 
 def kontoer(response):
-    context = {"useren": response.user.username, "kontoer": Account.objects.filter(user=response.user)}
+    accounts = Account.objects.filter(user=response.user)
+    fortune = get_fortune(response.user)
+    context = {"useren": response.user.username, "kontoer": accounts, "fortune": fortune}
     return render(response, "../templates/kontoer.html", context)
 
+def get_fortune(user):
+    fortune = 0
+    for account in Account.objects.filter(user=user):
+        fortune += account.belop
+    return fortune
 
 def redirect(response):
     return HttpResponsePermanentRedirect(reverse('home'))
@@ -73,9 +80,10 @@ def legg_til_sum(response):
                 new_sum.save()
             else:
                 account = account[int(form.data.get('account')) - 1]
-                new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, account=account.accountid, user=response.user,
+                new_sum = Sum(date=date, sum=sum, beskrivelse=beskrivelse, account=account, user=response.user,
                               month=month)
-                account.update(belop=account.belop+sum)
+                account.belop = account.belop+sum
+                account.save()
                 new_sum.save()
         return HttpResponseRedirect(reverse('regnskap'))
 
@@ -112,3 +120,13 @@ def slett_account(request):
                 # sletter den valgte bookingen
                 Account.objects.get(accountid=kontoid).delete()
             return HttpResponseRedirect(reverse('kontoer'))
+
+def oversikt(response):
+    used_months = Sum.objects.values_list('month', flat=True)
+    month_dict = {}
+    for month in used_months:
+        key = month-202001
+        month_dict[months[key]] = Sum.objects.filter(month = month)
+    context = {"month_dict": month_dict}
+    return render(response, "../templates/oversikt.html", context)
+

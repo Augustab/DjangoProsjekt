@@ -30,6 +30,7 @@
                     </div>
                 </div>
             {% endfor %}
+            <h5 id="overskrift" style="font-size: 30px; color: green">Total formue: {{ fortune }}</h5>
             <form method="POST" name="addAccount" action="{% url 'add_account' %}" >
                 {% csrf_token %}
                 <div><h4 style="text-align: left">Legg til en konto:</h4></div>

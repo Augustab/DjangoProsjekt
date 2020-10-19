@@ -29,6 +29,7 @@ urlpatterns = [
     path('legg_til_sum/', v.legg_til_sum, name="legg_til_sum"),
     path('slett_account/', v.slett_account, name="slett_account"),
     path('add_account/', v.add_account, name="add_account"),
+    path('oversikt/', v.oversikt, name="oversikt"),
     path('', v.redirect, name="redirect"),
     path('', include("django.contrib.auth.urls")),
 ]
