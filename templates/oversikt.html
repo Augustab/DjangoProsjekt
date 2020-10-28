@@ -30,7 +30,7 @@
                         <div class="col-sm-3"><h4 id="utleggene">{{ sum.account.name }}</h4></div>
                         <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum}}</h4></div>
                         <div class="col-sm-3">
-                            <form method="POST" name="slettForm" action="{% url 'slett_sum' %}" >
+                            <form method="POST" name="slettForm" action="{% url 'slett_sum2' %}" >
                                 {% csrf_token %}
                                 <input type="number" value="{{sum.sumid }}" style="display: none" name="sumid">
                                 <button type="submit" name="Slett_sum" class="btn btn-dark text-center" >Slett sum</button>

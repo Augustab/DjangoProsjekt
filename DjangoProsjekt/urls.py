@@ -26,6 +26,7 @@ urlpatterns = [
     path('regnskap/', v.regnskap, name="regnskap"),
     path('kontoer/', v.kontoer, name="kontoer"),
     path('slett_sum/', v.slett_sum, name="slett_sum"),
+    path('slett_sum2/', v.slett_sum2, name="slett_sum2"),
     path('legg_til_sum/', v.legg_til_sum, name="legg_til_sum"),
     path('slett_account/', v.slett_account, name="slett_account"),
     path('add_account/', v.add_account, name="add_account"),

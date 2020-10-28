@@ -100,6 +100,17 @@ def slett_sum(request):
             return HttpResponseRedirect(reverse('regnskap'))
 
 
+def slett_sum2(request):
+    if request.method == "POST":
+        form = slettForm(request.POST)
+        if form.is_valid():
+            # bookingid henter jeg fra det SKJULTE INPUTFELTET I FORM'en.
+            sumid = form.data.get('sumid')
+            if sumid is not None:
+                # sletter den valgte bookingen
+                Sum.objects.get(sumid=sumid).delete()
+            return HttpResponseRedirect(reverse('oversikt'))
+
 def add_account(request):
     if request.method == "POST":
         form = AccountForm(request.POST)
