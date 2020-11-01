@@ -22,14 +22,14 @@ class Account(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     accountid = models.AutoField(db_column='accountid', primary_key=True)
 
-   # def __str__(self):
-    #    return "Name: " + str(self.name) + \
-    #        " -- user:" + str(self.user.username)
+    def __str__(self):
+        return "Name: " + str(self.name) + \
+            " -- user:" + str(self.user.username)
 
 #Account.objects.get(name="Default").accountid
 class Sum(models.Model):
     '''Modellen for utlegg/inntekter'''
-    account = models.ForeignKey('Account', on_delete=models.CASCADE, default=None)
+    account = models.ForeignKey('Account', on_delete=models.CASCADE, default=Account.objects.get(name="Default").accountid)
     sum = models.IntegerField(default=None)
     beskrivelse = models.CharField(default=None, max_length=50)
     date = models.DateField(db_column='Sum_date', blank=True, null=True,
@@ -37,3 +37,7 @@ class Sum(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     month = models.IntegerField(default=None)
     sumid = models.AutoField(db_column='sumid', primary_key=True)
+
+    def __str__(self):
+        return "Amount: " + str(self.sum) + \
+            " -- user:" + str(self.user.username)
