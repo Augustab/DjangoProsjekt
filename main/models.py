@@ -29,7 +29,7 @@ class Account(models.Model):
 #Account.objects.get(name="Default").accountid
 class Sum(models.Model):
     '''Modellen for utlegg/inntekter'''
-    account = models.ForeignKey('Account', on_delete=models.CASCADE, default=Account.objects.get(name="Default").accountid)
+    account = models.ForeignKey('Account', on_delete=models.CASCADE, default=None)#Account.objects.get(name="Default").accountid)
     sum = models.IntegerField(default=None)
     beskrivelse = models.CharField(default=None, max_length=50)
     date = models.DateField(db_column='Sum_date', blank=True, null=True,
