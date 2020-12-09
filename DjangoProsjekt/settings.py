@@ -27,6 +27,7 @@ SECRET_KEY = 'o51(+ta9%h7-668cb5q2h6xp653a%)c^f+4b&apx6(9rudzjcz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = dj_database_url.config('DEBUG', default=False)
+DEBUG_PROPAGATE_EXCEPTIONS = True
 DEBUG = False
 ALLOWED_HOSTS = ['easy-accounting.herokuapp.com', '127.0.0.1']
 
