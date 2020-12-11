@@ -27,7 +27,7 @@
             current = current % backgrounds.length;
             header.css('background-image', backgrounds[current]);
         }
-    <!-- setInterval(nextBackground, 7000);-->
+        <!-- setInterval(nextBackground, 7000);-->
 
     header.css('background-image', backgrounds[1]);
     });
@@ -46,40 +46,41 @@
     {% block script %}{% endblock %}
 </head>
 <body>
-
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="/home" class="menytext">Hjem</a>
-    {% if user.is_superuser %}
-        <a href="/admin" class="menytext">Min bruker</a>
-    {% endif %}
-    {% if not user.is_authenticated %}
-        <a href="/login" class="menytext">Logg inn</a>
-        <a href="/signup" class="menytext">Lag bruker</a>
-    {% else %}
-        <a href="/logout" class="menytext">Logg ut</a>
-        <a href="/regnskap" class="menytext">Regnskap</a>
-        <a href="/kontoer" class="menytext">Kontoer</a>
-        <a href="/oversikt" class="menytext">Oversikt</a>
-    {% endif %}
-
+<div class="row">
+    <div class="col-sm-2 nopadding">
+        <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/home" class="menytext">Hjem</a>
+        {% if user.is_superuser %}
+            <a href="/admin" class="menytext">Min bruker</a>
+        {% endif %}
+        {% if not user.is_authenticated %}
+            <a href="/login" class="menytext">Logg inn</a>
+            <a href="/signup" class="menytext">Lag bruker</a>
+        {% else %}
+            <a href="/logout" class="menytext">Logg ut</a>
+            <a href="/regnskap" class="menytext">Regnskap</a>
+            <a href="/kontoer" class="menytext">Kontoer</a>
+            <a href="/oversikt" class="menytext">Oversikt</a>
+        {% endif %}
+        </div>
+        <img src="/static/images/meny.svg" alt="" onclick="openNav()" id="meny">
+    </div>
+    <div class="col-sm-7 nopadding"></div>
+    <div class="col-sm-3 nopadding">
+        <div id="loggetinn">
+            {% if user.is_authenticated %}
+                <h5>Logget inn som {{ user }}</h5>
+            {% else %}
+                <h5><a href="/signup" style="color:white;">Lag deg en bruker og logg inn</a></h5>
+            {% endif %}
+        </div>
+    </div>
 </div>
-
-<img src="/static/images/meny.svg" alt="" onclick="openNav()" id="meny">
-
-<div id="loggetinn">
-    {% if user.is_authenticated %}
-        <h4>Logget inn som {{ user }}</h4>
-    {% else %}
-        <h4><a href="/signup">Lag deg en bruker og logg inn</a></h4>
-    {% endif %}
-</div>
-
 {% block content %}
 {% endblock %}
-<div id="main">
 
-</div>
+
 
 
 </body>

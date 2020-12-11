@@ -16,9 +16,6 @@ def signup(response):
             new_user = authenticate(username=form.cleaned_data['username'],
                                     password=form.cleaned_data['password1'])
             login(response, new_user)
-            default_account = Account(name="default" + form.cleaned_data['username'], belop=0,
-                                      interest=0, user=response.user)
-            default_account.save()
             return redirect("/home")
     else:
         form = RegisterForm()

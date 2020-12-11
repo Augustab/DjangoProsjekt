@@ -58,9 +58,8 @@ def regnskap(response):
             total += int(value.sum)
         for value in pos_sums:
             total += int(value.sum)
-        print(total)
         accounts = Account.objects.filter(user=user)
-        print(accounts)
+        print("accountvariablen:", accounts)
     context = {"pos_sums": pos_sums, "neg_sums": neg_sums, "month": stringMonth, "total": total, "accounts": accounts}
     return render(response, "../templates/regnskap.html", context)
 
@@ -134,10 +133,12 @@ def slett_account(request):
 
 def oversikt(response):
     used_months = Sum.objects.values_list('month', flat=True)
+    have_any_sums = Sum.objects.filter(user=response.user)
     month_dict = {}
     for month in used_months:
         key = month-202001
-        month_dict[months[key]] = Sum.objects.filter(month = month)
-    context = {"month_dict": month_dict}
+        sum_this_month = Sum.objects.filter(month=month)
+        month_dict[months[key]] = sum_this_month.filter(user=response.user)
+    context = {"month_dict": month_dict, "have_any_sums": have_any_sums}
     return render(response, "../templates/oversikt.html", context)
 
