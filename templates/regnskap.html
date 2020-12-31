@@ -11,8 +11,8 @@
 
 {% block content %}
 <div class="row" >
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8" id="regnskapet">
+        <div class="col-sm-1 nopadding"></div>
+        <div class="col-sm-10 nopadding" id="regnskapet">
             <h3 id="overskrift">Regnskap for {{ month }}</h3>
             {% if accounts %}
                 <form method="POST" name="sumForm" action="{% url 'legg_til_sum' %}" >
@@ -81,7 +81,7 @@
                 <h4 id="">Du må lage en <a href="/kontoer">konto</a> før du kan føre regnskap</h4>
             {% endif %}
         </div>
-        <div class="col-sm-2" style="margin-right: 0; padding-right: 0"></div>
+        <div class="col-sm-1 nopadding" style="margin-right: 0; padding-right: 0"></div>
 
 </div>
 
