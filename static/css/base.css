@@ -7,7 +7,7 @@ body {
     font-size: 26px
 }
 
-
+/*
 html {
   background: url(/static/images/bilde2.jpg  ) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -15,6 +15,8 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+*/
+
 
 
 .nopadding {
