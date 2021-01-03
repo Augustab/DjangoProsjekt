@@ -12,36 +12,44 @@
 
 
 {% block content %}
-
-    {% for key, value in month_dict.items %}
-    <div class="row" id="outer_row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8" id="regnskapet">
-                <h3 id="overskrift">{{ key }}</h3>
-                <div class="row">
-                    <div class="col-sm-3"><h4>Dato</h4></div>
-                    <div class="col-sm-3"><h4>Konto</h4></div>
-                    <div class="col-sm-3"><h4>Sum</h4></div>
-                    <div class="col-sm-3"></div>
-                </div>
-                {% for sum in value %}
-                    <div class="row" id="row">
-                        <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
-                        <div class="col-sm-3"><h4 id="utleggene">{{ sum.account.name }}</h4></div>
-                        <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum}}</h4></div>
-                        <div class="col-sm-3">
-                            <form method="POST" name="slettForm" action="{% url 'slett_sum2' %}" >
-                                {% csrf_token %}
-                                <input type="number" value="{{sum.sumid }}" style="display: none" name="sumid">
-                                <button type="submit" name="Slett_sum" class="btn btn-dark text-center" >Slett sum</button>
-                            </form>
-                        </div>
+    {% if have_any_sums %}
+        {% for key, value in month_dict.items %}
+            <div class="row" id="outer_row">
+                <div class="col-sm-1 nopadding"></div>
+                <div class="col-sm-10 nopadding" id="regnskapet">
+                    <h3 id="overskrift">{{ key }}</h3>
+                    <div class="row">
+                        <div class="col-sm-3"><h4>Dato</h4></div>
+                        <div class="col-sm-3"><h4>Konto</h4></div>
+                        <div class="col-sm-3"><h4>Sum</h4></div>
+                        <div class="col-sm-3"></div>
                     </div>
-                {% endfor %}
+                    {% for sum in value %}
+                        <div class="row" id="row">
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.date }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.account.name }}</h4></div>
+                            <div class="col-sm-3"><h4 id="utleggene">{{ sum.sum}}</h4></div>
+                            <div class="col-sm-3">
+                                <form method="POST" name="slettForm" action="{% url 'slett_sum2' %}" >
+                                    {% csrf_token %}
+                                    <input type="number" value="{{sum.sumid }}" style="display: none" name="sumid">
+                                    <button type="submit" name="Slett_sum" class="btn btn-dark text-center" >Slett sum</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-2 nopadding"></div>
+                <br>
             </div>
-            <div class="col-sm-2"></div>
-            <br>
-
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="row" id="outer_row">
+            <div class="col-sm-1 nopadding"></div>
+            <div class="col-sm-10 nopadding" id="regnskapet">
+                <h3>Du har ingen bokførte utlegg/inntekter enda</h3>
+            </div>
+            <div class="col-sm-1 nopadding"></div>
+        </div>
+    {% endif %}
 {% endblock %}

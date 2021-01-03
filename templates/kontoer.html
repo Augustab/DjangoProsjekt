@@ -12,43 +12,45 @@
 
 
 {% block content %}
-    <div class="row" >
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8" id="regnskapet">
-            <h3 id="overskrift">Dine kontoer</h3>
-            {% for konto in kontoer %}
-                <div class="row" >
-                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.name }}</h4></div>
-                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.belop }}</h4></div>
-                    <div class="col-sm-3"><h4 id="utleggene">{{ konto.interest}}</h4></div>
-                    <div class="col-sm-3">
-                        <form method="POST" name="slettForm" action="{% url 'slett_account' %}" >
-                            {% csrf_token %}
-                            <input type="number" value="{{ konto.accountid }}" style="display: none" name="sumid">
-                            <button type="submit" name="Slett_konto" class="btn btn-dark text-center" >Slett konto</button>
-                        </form>
+    <div class="container-fluid">
+        <div class="row" >
+            <div class="col-sm-1 nopadding"></div>
+            <div class="col-sm-10 nopadding" id="regnskapet">
+                <h3 id="overskrift">Dine kontoer</h3>
+                {% for konto in kontoer %}
+                    <div class="row" style="margin-bottom: 1%">
+                        <div class="col-sm-3"><h4 id="utleggene">{{ konto.name }}</h4></div>
+                        <div class="col-sm-3"><h4 id="utleggene">{{ konto.belop }}</h4></div>
+                        <div class="col-sm-3"><h4 id="utleggene">{{ konto.interest}}</h4></div>
+                        <div class="col-sm-3">
+                            <form method="POST" name="slettForm" action="{% url 'slett_account' %}" >
+                                {% csrf_token %}
+                                <input type="number" value="{{ konto.accountid }}" style="display: none" name="sumid">
+                                <button type="submit" name="Slett_konto" class="btn btn-dark text-center" >Slett konto</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-            <h5 id="overskrift" style="font-size: 30px; color: green">Total formue: {{ fortune }}</h5>
-            <form method="POST" name="addAccount" action="{% url 'add_account' %}" >
-                {% csrf_token %}
-                <div><h4 style="text-align: left">Legg til en konto:</h4></div>
-                <div class="row">
-                    <div class="col-sm-3"><input type="text" class="form-control" placeholder="Kontonavn" name="name"></div>
-                    <div class="col-sm-3">
-                        <input type="number" class="form-control" placeholder="Beløp,-" name="belop">
+                {% endfor %}
+                <h5 id="overskrift" style="font-size: 30px; color: green">Total formue: {{ fortune }}</h5>
+                <form method="POST" name="addAccount" action="{% url 'add_account' %}" style="padding-bottom: 3%">
+                    {% csrf_token %}
+                    <div><h4 style="text-align: left">Legg til en konto:</h4></div>
+                    <div class="row">
+                        <div class="col-sm-3"><input type="text" class="form-control" placeholder="Kontonavn" name="name"></div>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" placeholder="Beløp,-" name="belop">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" placeholder="Rente" name="interest">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" name="send" class="btn btn-dark" >Registrer konto</button>
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" placeholder="Rente" name="interest">
-                    </div>
-                    <div class="col-sm-3">
-                        <button type="submit" name="send" class="btn btn-dark" >Registrer konto</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="col-sm-1 nopadding"></div>
         </div>
-        <div class="col-sm-2"></div>
-</div>
+    </div>
 
 {% endblock %}

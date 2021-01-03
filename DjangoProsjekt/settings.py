@@ -22,12 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'o51(+ta9%h7-668cb5q2h6xp653a%)c^f+4b&apx6(9rudzjcz'
-SECRET_KEY = dj_database_url.config('SECRET_KEY')
+SECRET_KEY = 'o51(+ta9%h7-668cb5q2h6xp653a%)c^f+4b&apx6(9rudzjcz'
+#SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = dj_database_url.config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = ["https://easy-accounting.herokuapp.com/"]
+#DEBUG = dj_database_url.config('DEBUG', default=False)
+DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG = False
+ALLOWED_HOSTS = ['easy-accounting.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -81,15 +83,17 @@ WSGI_APPLICATION = 'DjangoProsjekt.wsgi.application'
 
 DATABASES = {
 
-    'default': dj_database_url.config(default=dj_database_url.config('DATABASE_URL'))
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-     #   'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
+    #'default': dj_database_url.config(default=dj_database_url.config('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-# Password validation
+# Password validat
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -127,7 +131,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static"),

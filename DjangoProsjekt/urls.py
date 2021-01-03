@@ -19,6 +19,8 @@ import main.views as v
 import signup.views as v2
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', v.home, name="home"),
