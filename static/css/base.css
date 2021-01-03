@@ -7,15 +7,15 @@ body {
     font-size: 26px
 }
 
-/*
+
 html {
-  background: url(/static/images/graph.jpg  ) no-repeat center center fixed;
+  background: url(/static/images/bilde2.jpg  ) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-*/
+
 
 .nopadding {
    padding: 0 !important;
