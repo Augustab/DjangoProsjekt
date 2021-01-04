@@ -3,7 +3,7 @@
 
 
 body {
-    overflow: hidden;
+
     font-size: 26px
 }
 
@@ -73,6 +73,10 @@ html {
 #header{
     background-color: rgba(0,0,0, 0.9);
     margin: 0;
+}
+
+.row {
+    width: 100%;
 }
 
 #meny{
