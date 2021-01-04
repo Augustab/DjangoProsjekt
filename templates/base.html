@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static "css/menu.css" %}">
     <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
     {% block style %}{% endblock %}
-    <title>{% block title %}Midlertidig{% endblock %}</title>
+    <title>{% block title %}EasyAccounting{% endblock %}</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -104,6 +104,7 @@
             <a href="/regnskap" class="menytext" id="menyLinker">Accounting</a>
             <a href="/kontoer" class="menytext" id="menyLinker">Accounts</a>
             <a href="/oversikt" class="menytext" id="menyLinker">Overview</a>
+            <a href="/stocks" class="menytext" id="menyLinker">Stocks</a>
         {% endif %}
         {% if user.is_superuser %}
             <a href="/admin" class="menytext" id="menyLinker">Settings</a>

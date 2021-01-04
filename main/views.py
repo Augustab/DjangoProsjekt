@@ -3,6 +3,8 @@ from .models import Sum, Account
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import render
 from datetime import datetime
+from alpha_vantage.timeseries import TimeSeries
+from alpha_vantage.cryptocurrencies import CryptoCurrencies
 
 months = ["Januar", "Februar", "Mars",
           "April", "Mai", "Juni", "Juli",
@@ -142,3 +144,9 @@ def oversikt(response):
     context = {"month_dict": month_dict, "have_any_sums": have_any_sums}
     return render(response, "../templates/oversikt.html", context)
 
+ts = TimeSeries(key='OFI4G2DPXHE3CAWJ')
+data, meta_data = ts.get_intraday('AMZN')
+def stocks(response):
+    print(data)
+    print(meta_data)
+    return render(response, "../templates/stocks.html", {"data": data})

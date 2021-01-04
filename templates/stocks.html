@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Stocks{% endblock %}
+{% block style %}<link rel="stylesheet" href="/static/css/stocks.css">{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block script %}
+    <script></script>
+{% endblock %}
+
+{% block content %}
+<div class="row" >
+        <div class="col-sm-1 nopadding"></div>
+        <div class="col-sm-10 nopadding" id="regnskapet">
+            <h3 id="overskrift">Your selected stocks</h3>
+            <p>{{ data }}</p>
+        </div>
+        <div class="col-sm-1 nopadding"></div>
+</div>
+
+
+
+{% endblock %}

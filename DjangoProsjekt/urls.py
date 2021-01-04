@@ -33,6 +33,7 @@ urlpatterns = [
     path('slett_account/', v.slett_account, name="slett_account"),
     path('add_account/', v.add_account, name="add_account"),
     path('oversikt/', v.oversikt, name="oversikt"),
+    path('stocks/', v.stocks, name="stocks"),
     path('', v.redirect, name="redirect"),
     path('', include("django.contrib.auth.urls")),
 ]
