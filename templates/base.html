@@ -73,7 +73,7 @@
     {% endblock %}
 </head>
 <body>
-    <div class="container-fluid" style="margin-bottom: 0">
+<div class="container-fluid" style="margin-bottom: 0">
         <div class="row" id="header">
             <div class="col-3 nopadding">
                 <div id="nav-icon3" onclick="smartOne()">
@@ -94,7 +94,7 @@
                 {% endif %}
             </div>
         </div>
-    </div>
+</div>
     <div id="mySidenav" class="sidenav">
         {% if not user.is_authenticated %}
             <a href="/login" class="menytext" id="menyLinker">Log in</a>
@@ -110,7 +110,7 @@
             <a href="/admin" class="menytext" id="menyLinker">Settings</a>
         {% endif %}
     </div>
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 </body>
 </html>

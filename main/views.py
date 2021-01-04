@@ -144,7 +144,7 @@ def oversikt(response):
     context = {"month_dict": month_dict, "have_any_sums": have_any_sums}
     return render(response, "../templates/oversikt.html", context)
 
-ts = TimeSeries(key='OFI4G2DPXHE3CAWJ')
+ts = TimeSeries(key='ALPA_KEY')
 data, meta_data = ts.get_intraday('AMZN')
 def stocks(response):
     print(data)
