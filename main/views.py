@@ -1,3 +1,7 @@
+import base64
+import io
+import urllib
+
 from .forms import sumForm, slettForm, AccountForm
 from .models import Sum, Account
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
@@ -5,6 +9,11 @@ from django.shortcuts import render
 from datetime import datetime
 from alpha_vantage.timeseries import TimeSeries
 from alpha_vantage.cryptocurrencies import CryptoCurrencies
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
 months = ["Januar", "Februar", "Mars",
           "April", "Mai", "Juni", "Juli",
@@ -144,9 +153,25 @@ def oversikt(response):
     context = {"month_dict": month_dict, "have_any_sums": have_any_sums}
     return render(response, "../templates/oversikt.html", context)
 
-ts = TimeSeries(key='ALPA_KEY')
-data, meta_data = ts.get_intraday('AMZN')
+#ts = TimeSeries(key='ALPA_KEY')
+#cc = CryptoCurrencies(key='ALPA_KEY')
+#amzn, meta_data = ts.get_intraday('AMZN')
+#btc, meta_btc = cc.get_digital_currency_daily(symbol='BTC',market="USD")
+#eth, meta_eth = cc.get_digital_currency_daily(symbol='ETH',market="USD")
+
 def stocks(response):
+    cc = CryptoCurrencies(key='ALPA_KEY', output_format='pandas')    #data = ts2.get_intraday(symbol='AMZN', interval='1min', outputsize='full')
+    data = cc.get_digital_currency_daily(symbol='BTC',market='USD')
+    print("index:", data.index)
     print(data)
-    print(meta_data)
-    return render(response, "../templates/stocks.html", {"data": data})
+    data[0]['1a. open (USD)'].plot()
+    plt.tight_layout()
+    plt.title('Historical BTC-price')
+    figure = plt.gcf()
+    buffer = io.BytesIO()
+    figure.savefig(buffer, format='png')
+    buffer.seek(0)
+    string = base64.b64encode(buffer.read())
+    #url = urllib.parse.quote(string)
+    url = string.decode('utf-8')
+    return render(response, "../templates/stocks.html", {"url": url})
