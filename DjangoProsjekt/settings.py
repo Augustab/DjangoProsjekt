@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'signup.apps.SignupConfig',
     'crispy_forms',
     'main',
+    'django_altair',
 ]
 
 MIDDLEWARE = [

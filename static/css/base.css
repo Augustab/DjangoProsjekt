@@ -1,11 +1,5 @@
-/* The side navigation menu */
 
 
-
-body {
-
-    font-size: 26px
-}
 
 /*
 html {
@@ -16,8 +10,6 @@ html {
   background-size: cover;
 }
 */
-
-
 
 .nopadding {
    padding: 0 !important;
@@ -36,12 +28,11 @@ html {
     display: none;
     height: 0; /* 100% Full-height */
     width: 100%; /* 0 width - change this with JavaScript */
-    z-index: 1; /* Stay on top */
+    z-index: 100; /* Stay on top */
     background-color: rgba(0,0,0,0.9);/* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s ease-in-out;/* 0.5 second transition effect to slide in the sidenav */
-    position: relative;
-    margin-top: 0px;
+    position: fixed;
     color: white;
     padding-bottom: 2px;
 }
@@ -73,6 +64,9 @@ html {
 #header{
     background-color: rgba(0,0,0, 0.9);
     margin: 0;
+    position: fixed;
+    top:0;
+    z-index: 89;
 }
 
 .row {
@@ -86,9 +80,6 @@ html {
     z-index: -100;
 }
 
-#logo{
-    height: 120px;
-}
 
 #loggetinn{
     font-family: sans-serif;
@@ -111,6 +102,33 @@ html {
    /* font-size: 700%*/
 }
 
+
+
 ::-webkit-scrollbar {
     display: none;
 }
+
+@media screen and (min-width: 900px) {
+    #logo {
+        width: 33%;
+    }
+    body {
+        font-size: 26px
+    }
+    /*.sidenav {
+        top: 150px;
+    }*/
+}
+
+@media screen and (max-width: 900px) {
+    #logo {
+        width: 70%;
+    }
+    body {
+    font-size: 20px
+    }
+    /*.sidenav {
+        top: 100px;
+    }*/
+}
+

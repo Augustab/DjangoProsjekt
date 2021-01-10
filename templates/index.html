@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load django_altair %}
+
+{% load static %}
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <p>This is a chart</p>
+    {% render_chart chart %}
+</div>
+
+<div>
+    <p>This is a chart</p>
+    {% render_chart chart %}
+</div>
+
+<div>
+    <p>This is a chart</p>
+    {% render_chart chart %}
+</div>
+
+<div>
+    <p>This is a chart</p>
+    {% render_chart chart2 %}
+</div>
+
+{% endblock %}

@@ -4,19 +4,42 @@
 {% block title %}Stocks{% endblock %}
 {% block style %}<link rel="stylesheet" href="/static/css/stocks.css">{% endblock %}
 {% load crispy_forms_tags %}
+{% load django_altair %}
 
 {% block script %}
-    <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 {% endblock %}
 
 {% block content %}
+    <div class="container-fluid" id="content">
+        <div class="row nopadding" id="mobile">
+            <div class="col-6" style="display: flex; justify-content: flex-end;">
+                <strong><p >BTC price chart:</p></strong>
+            </div>
+            <div class="col-6"></div>
+        </div>
+        <div class="row nopadding" id="desktop">
+            <div class="col-4" style="display: flex; justify-content: flex-end;">
+                <strong><p >BTC price chart:</p></strong>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+        </div>
+    </div>
     <div class="container-fluid" style="margin: 0">
-        <div class="row" >
-            <div class="col-sm-1 nopadding"></div>
-            <div class="col-sm-10 nopadding" id="regnskapet">
+        <div class="row nopadding" id="desktop">
+            <div class="col-1 nopadding"></div>
+            <div class="col-10 nopadding" id="graph">
                 <img src="data:image/png;base64,{{ url }}" alt="graph" width="70%">
             </div>
-            <div class="col-sm-1 nopadding"></div>
+            <div class="col-1 nopadding"></div>
+        </div>
+        <div class="row nopadding" id="mobile">
+            <div class="col-12 nopadding" id="graph">
+                <img src="data:image/png;base64,{{ url }}" alt="graph" width="90%">
+            </div>
         </div>
     </div>
 {% endblock %}
