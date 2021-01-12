@@ -61,12 +61,14 @@ html {
   padding: 20px;
 }
 
-#header{
-    background-color: rgba(0,0,0, 0.9);
-    margin: 0;
-    position: fixed;
-    top:0;
-    z-index: 89;
+
+
+.formBackground {
+    height: auto;
+    background-color : rgba(55,54,51, 1);
+    overflow: hidden;
+    margin: 50px;
+    box-shadow: 0px 0px 25px 25px rgba(55,54,51, 1);
 }
 
 .row {
@@ -115,9 +117,14 @@ html {
     body {
         font-size: 26px
     }
-    /*.sidenav {
-        top: 150px;
-    }*/
+    #header{
+    background-color: rgba(0,0,0, 0.9);
+    margin: 0;
+    position: fixed;
+    top:0;
+    z-index: 89;
+    box-shadow: 0px 0px 25px 25px rgba(0,0,0, 0.9);
+}
 }
 
 @media screen and (max-width: 900px) {
@@ -127,8 +134,13 @@ html {
     body {
     font-size: 20px
     }
-    /*.sidenav {
-        top: 100px;
-    }*/
+    #header{
+    background-color: rgba(0,0,0, 0.9);
+    margin: 0;
+    position: fixed;
+    top:0;
+    z-index: 89;
+    box-shadow: 0px 0px 25px 10px rgba(0,0,0, 0.9);
+}
 }
 
